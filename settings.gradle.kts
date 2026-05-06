@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "quick-xml-kotlin"
+
