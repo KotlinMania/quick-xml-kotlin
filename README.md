@@ -203,7 +203,7 @@ MIT
 
 ```kotlin
 dependencies {
-    implementation("io.github.kotlinmania:quick-xml-kotlin:0.1.0")
+    implementation("io.github.kotlinmania:quick-xml-kotlin:0.1.0-SNAPSHOT")
 }
 ```
 
