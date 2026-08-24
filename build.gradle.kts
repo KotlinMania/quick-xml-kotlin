@@ -711,8 +711,7 @@ mavenPublishing {
 tasks.register("test") {
     group = "verification"
     description = "Runs the commonTest-backed KMP suite, Android host tests, and Swift Export smoke test."
-    dependsOn("allTests")
-    dependsOn("testAndroidHostTest")
+    dependsOn("hostTests")
     dependsOn("swiftExportSmokeTest")
 }
 
@@ -738,6 +737,45 @@ tasks.register("hostTests") {
     )
 }
 
+// Patch generated SPM Package.swift to include minimum macOS platform for Swift Concurrency
+tasks.matching { it.name.contains("GenerateSPMPackage") }.configureEach {
+    doLast {
+        val spmDir =
+            layout.buildDirectory
+                .dir("SPMPackage")
+                .orNull
+                ?.asFile
+        if (spmDir != null && spmDir.exists()) {
+            spmDir.walkTopDown().filter { it.name == "Package.swift" }.forEach { file ->
+                val text = file.readText()
+                if (!text.contains("platforms:")) {
+                    file.writeText(
+                        text.replaceFirst(
+                            Regex("""(let package = Package\s*\(\s*name:\s*"[^"]*",)"""),
+                            "$1\n    platforms: [.macOS(.v14)],",
+                        ),
+                    )
+                }
+            }
+        }
+    }
+}
+
+tasks.matching { it.name.contains("BuildSPMPackage") }.configureEach {
+    doFirst {
+        layout.buildDirectory
+            .dir("SPMBuild/macosArm64/Debug/dd-a-files")
+            .orNull
+            ?.asFile
+            ?.mkdirs()
+        layout.buildDirectory
+            .dir("SPMBuild/macosArm64/Release/dd-a-files")
+            .orNull
+            ?.asFile
+            ?.mkdirs()
+    }
+}
+
 // Swift Export smoke test — produces the SPM package via embedSwiftExportForXcode
 // (spawned with the Xcode-style env it requires) and runs `swift test` against it,
 // so Swift Export breakage surfaces locally, not only in the swift.yml CI job.
@@ -746,16 +784,39 @@ tasks.register("hostTests") {
 tasks.register("swiftExportSmokeTest") {
     group = "verification"
     description = "Builds the Swift Export SPM package and runs swift test against it."
+    mustRunAfter("hostTests")
     outputs.upToDateWhen { false }
 
     doLast {
         val execOperations = serviceOf<ExecOperations>()
-        val swiftBuildDir =
+        val swiftBuildDirFile =
             layout.buildDirectory
                 .dir("swift-test")
                 .get()
                 .asFile
-                .absolutePath
+        swiftBuildDirFile.deleteRecursively()
+        swiftBuildDirFile.mkdirs()
+        val swiftBuildDir = swiftBuildDirFile.absolutePath
+        layout.buildDirectory
+            .dir("SPMBuild")
+            .get()
+            .asFile
+            .deleteRecursively()
+        layout.buildDirectory
+            .dir("SPMPackage")
+            .get()
+            .asFile
+            .deleteRecursively()
+        layout.buildDirectory
+            .dir("bin/macosArm64/SwiftExportBinaryDebugStatic")
+            .get()
+            .asFile
+            .mkdirs()
+        layout.buildDirectory
+            .dir("SPMBuild/macosArm64/Debug/dd-a-files")
+            .get()
+            .asFile
+            .mkdirs()
         execOperations
             .exec {
                 workingDir = projectDir
@@ -763,7 +824,6 @@ tasks.register("swiftExportSmokeTest") {
                     "./gradlew",
                     "embedSwiftExportForXcode",
                     "--no-configuration-cache",
-                    "--no-daemon",
                     "--console=plain",
                 )
                 environment(
