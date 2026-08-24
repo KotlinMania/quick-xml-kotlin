@@ -784,39 +784,16 @@ tasks.matching { it.name.contains("BuildSPMPackage") }.configureEach {
 tasks.register("swiftExportSmokeTest") {
     group = "verification"
     description = "Builds the Swift Export SPM package and runs swift test against it."
-    mustRunAfter("hostTests")
     outputs.upToDateWhen { false }
 
     doLast {
         val execOperations = serviceOf<ExecOperations>()
-        val swiftBuildDirFile =
+        val swiftBuildDir =
             layout.buildDirectory
                 .dir("swift-test")
                 .get()
                 .asFile
-        swiftBuildDirFile.deleteRecursively()
-        swiftBuildDirFile.mkdirs()
-        val swiftBuildDir = swiftBuildDirFile.absolutePath
-        layout.buildDirectory
-            .dir("SPMBuild")
-            .get()
-            .asFile
-            .deleteRecursively()
-        layout.buildDirectory
-            .dir("SPMPackage")
-            .get()
-            .asFile
-            .deleteRecursively()
-        layout.buildDirectory
-            .dir("bin/macosArm64/SwiftExportBinaryDebugStatic")
-            .get()
-            .asFile
-            .mkdirs()
-        layout.buildDirectory
-            .dir("SPMBuild/macosArm64/Debug/dd-a-files")
-            .get()
-            .asFile
-            .mkdirs()
+                .absolutePath
         execOperations
             .exec {
                 workingDir = projectDir
@@ -824,6 +801,7 @@ tasks.register("swiftExportSmokeTest") {
                     "./gradlew",
                     "embedSwiftExportForXcode",
                     "--no-configuration-cache",
+                    "--no-daemon",
                     "--console=plain",
                 )
                 environment(
@@ -839,23 +817,6 @@ tasks.register("swiftExportSmokeTest") {
                     ),
                 )
             }.assertNormalExitValue()
-
-        val generatedPackageSwift =
-            layout.buildDirectory
-                .file("SPMPackage/macosArm64/Debug/Package.swift")
-                .get()
-                .asFile
-        if (generatedPackageSwift.exists()) {
-            val text = generatedPackageSwift.readText()
-            if (!text.contains("platforms:")) {
-                generatedPackageSwift.writeText(
-                    text.replaceFirst(
-                        Regex("(name:\\s*\"[^\"]*\",)"),
-                        "\$1\n    platforms: [.macOS(.v14)],",
-                    ),
-                )
-            }
-        }
 
         execOperations
             .exec {
