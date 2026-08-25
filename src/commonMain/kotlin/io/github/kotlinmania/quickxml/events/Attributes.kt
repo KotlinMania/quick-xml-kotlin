@@ -1,4 +1,4 @@
-// port-lint: source tmp/quick-xml/src/events/attributes.rs
+// port-lint: source events/attributes.rs
 package io.github.kotlinmania.quickxml.events
 
 import io.github.kotlinmania.quickxml.Decoder

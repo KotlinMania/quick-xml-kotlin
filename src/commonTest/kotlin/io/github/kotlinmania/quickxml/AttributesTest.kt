@@ -1,4 +1,4 @@
-// port-lint: tests tmp/quick-xml/src/events/attributes.rs
+// port-lint: tests events/attributes.rs
 package io.github.kotlinmania.quickxml
 
 import io.github.kotlinmania.quickxml.events.AttrError

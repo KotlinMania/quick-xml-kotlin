@@ -1,4 +1,4 @@
-// port-lint: source tmp/quick-xml/src/reader/ns_reader.rs
+// port-lint: source reader/ns_reader.rs
 package io.github.kotlinmania.quickxml.reader
 
 import io.github.kotlinmania.quickxml.Namespace

@@ -1,4 +1,4 @@
-// port-lint: tests tmp/quick-xml/src/reader/mod.rs
+// port-lint: tests reader/mod.rs
 package io.github.kotlinmania.quickxml
 
 import io.github.kotlinmania.quickxml.events.Event

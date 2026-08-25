@@ -1,4 +1,4 @@
-// port-lint: source tmp/quick-xml/src/lib.rs
+// port-lint: source lib.rs
 package io.github.kotlinmania.quickxml
 
 public typealias XmlReader = io.github.kotlinmania.quickxml.reader.Reader

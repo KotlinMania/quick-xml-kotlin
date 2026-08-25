@@ -1,4 +1,4 @@
-// port-lint: tests tmp/quick-xml/src/reader/ns_reader.rs
+// port-lint: tests reader/ns_reader.rs
 package io.github.kotlinmania.quickxml
 
 import io.github.kotlinmania.quickxml.events.Event

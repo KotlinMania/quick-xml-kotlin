@@ -1,4 +1,3 @@
-// port-lint: source tmp/quick-xml/src/reader/mod.rs
 package io.github.kotlinmania.quickxml.reader
 
 import io.github.kotlinmania.quickxml.Decoder
