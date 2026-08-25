@@ -1,4 +1,4 @@
-// port-lint: source tmp/quick-xml/src/encoding.rs
+// port-lint: source encoding.rs
 package io.github.kotlinmania.quickxml
 
 public val UTF8_BOM: ByteArray = byteArrayOf(0xEF.toByte(), 0xBB.toByte(), 0xBF.toByte())

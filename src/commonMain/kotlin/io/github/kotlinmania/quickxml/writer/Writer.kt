@@ -1,4 +1,4 @@
-// port-lint: source tmp/quick-xml/src/writer.rs
+// port-lint: source writer.rs
 package io.github.kotlinmania.quickxml.writer
 
 import io.github.kotlinmania.quickxml.events.Attribute
