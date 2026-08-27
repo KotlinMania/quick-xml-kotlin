@@ -33,14 +33,15 @@ class EscapeTest {
 
     @Test
     fun testUnescapeCustom() {
-        val result = unescapeWith("&amp;&lt;test&gt;&baz;") { entity ->
-            when (entity) {
-                "lt" -> "FOO"
-                "gt" -> "BAR"
-                "baz" -> "&lt;"
-                else -> resolveXmlEntity(entity)
+        val result =
+            unescapeWith("&amp;&lt;test&gt;&baz;") { entity ->
+                when (entity) {
+                    "lt" -> "FOO"
+                    "gt" -> "BAR"
+                    "baz" -> "&lt;"
+                    else -> resolveXmlEntity(entity)
+                }
             }
-        }
         assertEquals("&FOOtestBAR&lt;", result)
     }
 

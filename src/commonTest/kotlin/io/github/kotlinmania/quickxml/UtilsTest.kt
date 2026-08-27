@@ -13,22 +13,65 @@ class UtilsTest {
 
     @Test
     fun writeByteString1() {
-        val bytes = ByteBuf(
-            byteArrayOf(
-                104, 116, 116, 112, 58, 47, 47, 119, 119, 119, 46, 119, 51, 46, 111, 114, 103, 47, 50,
-                48, 48, 50, 47, 48, 55, 47, 111, 119, 108, 35,
-            ),
-        )
+        val bytes =
+            ByteBuf(
+                byteArrayOf(
+                    104,
+                    116,
+                    116,
+                    112,
+                    58,
+                    47,
+                    47,
+                    119,
+                    119,
+                    119,
+                    46,
+                    119,
+                    51,
+                    46,
+                    111,
+                    114,
+                    103,
+                    47,
+                    50,
+                    48,
+                    48,
+                    50,
+                    47,
+                    48,
+                    55,
+                    47,
+                    111,
+                    119,
+                    108,
+                    35,
+                ),
+            )
         assertEquals("\"http://www.w3.org/2002/07/owl#\"", bytes.toString())
     }
 
     @Test
     fun writeByteString3() {
-        val bytes = ByteBuf(
-            byteArrayOf(
-                67, 108, 97, 115, 115, 32, 73, 82, 73, 61, 34, 35, 66, 34,
-            ),
-        )
+        val bytes =
+            ByteBuf(
+                byteArrayOf(
+                    67,
+                    108,
+                    97,
+                    115,
+                    115,
+                    32,
+                    73,
+                    82,
+                    73,
+                    61,
+                    34,
+                    35,
+                    66,
+                    34,
+                ),
+            )
         assertEquals("\"Class IRI=\\\"#B\\\"\"", bytes.toString())
     }
 

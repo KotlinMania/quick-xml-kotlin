@@ -4,18 +4,25 @@ package io.github.kotlinmania.quickxml
 public sealed class ParseCharRefError : Exception() {
     public object UnexpectedSign : ParseCharRefError() {
         override val message: String get() = "unexpected number sign"
+
         override fun toString(): String = "ParseCharRefError.UnexpectedSign"
     }
 
-    public data class InvalidNumber(public val reason: String) : ParseCharRefError() {
+    public data class InvalidNumber(
+        public val reason: String,
+    ) : ParseCharRefError() {
         override val message: String get() = reason
     }
 
-    public data class InvalidCodepoint(public val codepoint: Long) : ParseCharRefError() {
+    public data class InvalidCodepoint(
+        public val codepoint: Long,
+    ) : ParseCharRefError() {
         override val message: String get() = "`$codepoint` is not a valid codepoint"
     }
 
-    public data class IllegalCharacter(public val codepoint: Long) : ParseCharRefError() {
+    public data class IllegalCharacter(
+        public val codepoint: Long,
+    ) : ParseCharRefError() {
         override val message: String get() = "0x${codepoint.toString(16)} character is not permitted in XML"
     }
 }
@@ -28,11 +35,15 @@ public sealed class EscapeError : Exception() {
         override val message: String get() = "at $range: unrecognized entity `$entity`"
     }
 
-    public data class UnterminatedEntity(public val range: IntRange) : EscapeError() {
+    public data class UnterminatedEntity(
+        public val range: IntRange,
+    ) : EscapeError() {
         override val message: String get() = "Error while escaping character at range $range: Cannot find ';' after '&'"
     }
 
-    public data class InvalidCharRef(public val error: ParseCharRefError) : EscapeError() {
+    public data class InvalidCharRef(
+        public val error: ParseCharRefError,
+    ) : EscapeError() {
         override val message: String get() = "invalid character reference: ${error.message}"
         override val cause: Throwable get() = error
     }
@@ -120,8 +131,9 @@ public fun unescapeWith(raw: String, resolveEntity: (String) -> String?): String
                     sb.append(low)
                 }
             } else {
-                val resolved = resolveEntity(pat)
-                    ?: throw EscapeError.UnrecognizedEntity(i + 1 until semi, pat)
+                val resolved =
+                    resolveEntity(pat)
+                        ?: throw EscapeError.UnrecognizedEntity(i + 1 until semi, pat)
                 sb.append(resolved)
             }
             lastEnd = semi + 1
@@ -150,24 +162,25 @@ public fun resolvePredefinedEntity(entity: String): String? =
     resolveXmlEntity(entity)
 
 public fun parseNumber(num: String): Int {
-    val code = if (num.startsWith('x') || num.startsWith('X')) {
-        val hex = num.substring(1)
-        if (hex.isEmpty()) throw ParseCharRefError.InvalidNumber("empty hex string")
-        if (hex.startsWith('+') || hex.startsWith('-')) throw ParseCharRefError.UnexpectedSign
-        try {
-            hex.toLong(16)
-        } catch (e: Exception) {
-            throw ParseCharRefError.InvalidNumber(e.message ?: "invalid hex number")
+    val code =
+        if (num.startsWith('x') || num.startsWith('X')) {
+            val hex = num.substring(1)
+            if (hex.isEmpty()) throw ParseCharRefError.InvalidNumber("empty hex string")
+            if (hex.startsWith('+') || hex.startsWith('-')) throw ParseCharRefError.UnexpectedSign
+            try {
+                hex.toLong(16)
+            } catch (e: Exception) {
+                throw ParseCharRefError.InvalidNumber(e.message ?: "invalid hex number")
+            }
+        } else {
+            if (num.isEmpty()) throw ParseCharRefError.InvalidNumber("empty decimal string")
+            if (num.startsWith('+') || num.startsWith('-')) throw ParseCharRefError.UnexpectedSign
+            try {
+                num.toLong(10)
+            } catch (e: Exception) {
+                throw ParseCharRefError.InvalidNumber(e.message ?: "invalid decimal number")
+            }
         }
-    } else {
-        if (num.isEmpty()) throw ParseCharRefError.InvalidNumber("empty decimal string")
-        if (num.startsWith('+') || num.startsWith('-')) throw ParseCharRefError.UnexpectedSign
-        try {
-            num.toLong(10)
-        } catch (e: Exception) {
-            throw ParseCharRefError.InvalidNumber(e.message ?: "invalid decimal number")
-        }
-    }
 
     if (code == 0L) {
         throw ParseCharRefError.IllegalCharacter(code)

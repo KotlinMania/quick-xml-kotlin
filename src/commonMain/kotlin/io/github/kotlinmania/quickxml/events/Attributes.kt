@@ -8,23 +8,35 @@ import io.github.kotlinmania.quickxml.unescape
 import io.github.kotlinmania.quickxml.unescapeWith
 
 public sealed class AttrError : Exception() {
-    public data class ExpectedEq(public val pos: Int) : AttrError() {
+    public data class ExpectedEq(
+        public val pos: Int,
+    ) : AttrError() {
         override val message: String get() = "position " + pos + ": attribute key must be directly followed by = or space"
     }
 
-    public data class ExpectedValue(public val pos: Int) : AttrError() {
+    public data class ExpectedValue(
+        public val pos: Int,
+    ) : AttrError() {
         override val message: String get() = "position " + pos + ": = must be followed by an attribute value"
     }
 
-    public data class UnquotedValue(public val pos: Int) : AttrError() {
+    public data class UnquotedValue(
+        public val pos: Int,
+    ) : AttrError() {
         override val message: String get() = "position " + pos + ": attribute value must be enclosed in quotes"
     }
 
-    public data class ExpectedQuote(public val pos: Int, public val quote: Byte) : AttrError() {
+    public data class ExpectedQuote(
+        public val pos: Int,
+        public val quote: Byte,
+    ) : AttrError() {
         override val message: String get() = "position " + pos + ": attribute value missing closing quote"
     }
 
-    public data class Duplicated(public val errorPos: Int, public val prevPos: Int) : AttrError() {
+    public data class Duplicated(
+        public val errorPos: Int,
+        public val prevPos: Int,
+    ) : AttrError() {
         override val message: String get() = "position " + errorPos + ": attribute key is duplicated"
     }
 }
@@ -74,8 +86,8 @@ public class Attributes(
     public val html: Boolean = false,
     private var checkDuplicates: Boolean = true,
     private val decoder: Decoder = Decoder.utf8(),
-) : Iterable<Attribute>, Iterator<Attribute> {
-
+) : Iterable<Attribute>,
+    Iterator<Attribute> {
     public constructor(buf: String, pos: Int = 0) : this(buf.encodeToByteArray(), pos, false)
 
     private val keys = mutableListOf<IntRange>()

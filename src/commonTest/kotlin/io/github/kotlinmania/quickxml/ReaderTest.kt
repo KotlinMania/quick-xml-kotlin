@@ -5,8 +5,8 @@ import io.github.kotlinmania.quickxml.events.Event
 import io.github.kotlinmania.quickxml.reader.Reader
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class ReaderTest {
     @Test
