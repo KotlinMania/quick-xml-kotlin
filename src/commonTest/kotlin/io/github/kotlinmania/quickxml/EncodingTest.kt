@@ -1,4 +1,4 @@
-// port-lint: tests quick-xml/src/encoding.rs
+// port-lint: tests encoding.rs
 package io.github.kotlinmania.quickxml
 
 import kotlin.test.Test

@@ -8,10 +8,10 @@ Based on AST analysis, here are the concrete next steps.
 - **Function parity:** 88/728 matched (target 300) — 12.1%
 - **Class/type parity:** 27/232 matched (target 111) — 11.6%
 - **Combined symbol parity:** 115/960 matched (target 411) — 12.0%
-- **Average inline-code cosine:** 0.20 (function body across 8 matched files)
-- **Average documentation cosine:** 0.05 (doc text across 8 matched files)
-- **Cheat-zeroed Files:** 6
-- **Critical Issues:** 14 files with <0.60 function similarity
+- **Average inline-code cosine:** 0.29 (function body across 9 matched files)
+- **Average documentation cosine:** 0.04 (doc text across 9 matched files)
+- **Cheat-zeroed Files:** 5
+- **Critical Issues:** 13 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -38,7 +38,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 3)
 - **Missing types:** `Target`
 
-### 2. quick-xml.encoding
+### 2. encoding
 
 - **Target:** `quickxml.Encoding`
 - **Similarity:** 0.28
@@ -60,8 +60,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/11 matched (target 1)
 - **Missing types:** `Text`, `Target`, `DeEvent`, `PayloadEvent`, `XmlReader`, `Deserializer`, `Error`, `XmlRead`, `IoReader`, `SliceReader`, `List`
 - **Tests:** 0/20 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `quick-xml/src/reader/mod.rs` vs expected `de/mod.rs`
-- **Proposed provenance header:** `// port-lint: source de/mod.rs` (current: `// port-lint: source quick-xml/src/reader/mod.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `reader/mod.rs` vs expected `de/mod.rs`
+- **Proposed provenance header:** `// port-lint: source de/mod.rs` (current: `// port-lint: source reader/mod.rs`)
 - **Lint issues:** 1
 
 ### 4. events.mod
@@ -87,11 +87,11 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/17 matched (target 18)
 - **Missing types:** `TextFormat`, `QuoteLevel`, `WriteResult`, `XmlName`, `Indent`, `Serializer`, `Ok`, `Error`, `SerializeSeq`, `SerializeTuple`, `SerializeTupleStruct`, `SerializeTupleVariant`, `SerializeMap`, `SerializeStruct`, `SerializeStructVariant`, `Element`, `Example`
 - **Tests:** 0/4 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `quick-xml/src/events/mod.rs` vs expected `se/mod.rs`
-- **Proposed provenance header:** `// port-lint: source se/mod.rs` (current: `// port-lint: source quick-xml/src/events/mod.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `events/mod.rs` vs expected `se/mod.rs`
+- **Proposed provenance header:** `// port-lint: source se/mod.rs` (current: `// port-lint: source events/mod.rs`)
 - **Lint issues:** 1
 
-### 6. quick-xml.name
+### 6. name
 
 - **Target:** `quickxml.Name`
 - **Similarity:** 0.13
@@ -126,7 +126,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/10 matched (target 2)
 - **Missing types:** `Config`, `Span`, `ParseState`, `EncodingRef`, `BinaryStream`, `ReadTextResult`, `ReadRefResult`, `XmlSource`, `BangType`
 
-### 9. quick-xml.utils
+### 9. utils
 
 - **Target:** `quickxml.Utils`
 - **Similarity:** 0.19
@@ -138,7 +138,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `CowRef`, `Target`, `ValueVisitor`, `Value`, `Item`
 - **Tests:** 3/3 matched
 
-### 10. quick-xml.escape
+### 10. escape
 
 - **Target:** `quickxml.Escape`
 - **Similarity:** 0.19
@@ -150,7 +150,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 0/10 matched
 
-### 11. quick-xml.writer
+### 11. writer
 
 - **Target:** `writer.Writer`
 - **Similarity:** 0.30
@@ -161,7 +161,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/5 matched (target 4)
 - **Missing types:** `AttributeIndent`, `ToFmtWrite`
 
-### 12. quick-xml.errors
+### 12. errors
 
 - **Target:** `quickxml.Errors`
 - **Similarity:** 0.00
@@ -183,12 +183,12 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 4)
 - **Missing types:** _none_
 
-### 14. quick-xml.lib
+### 14. lib
 
-- **Target:** `quickxml.Lib [STUB]`
-- **Similarity:** 0.00
+- **Target:** `quickxml.Lib`
+- **Similarity:** 1.00
 - **Dependents:** 0
-- **Priority Score:** 10.0
+- **Priority Score:** 0.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 4)

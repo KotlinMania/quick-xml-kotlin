@@ -1,4 +1,4 @@
-// port-lint: source quick-xml/src/reader/mod.rs
+// port-lint: source reader/mod.rs
 package io.github.kotlinmania.quickxml.reader
 
 // Submodules in reader:
