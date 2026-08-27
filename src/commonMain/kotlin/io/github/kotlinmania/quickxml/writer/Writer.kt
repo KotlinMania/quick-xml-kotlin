@@ -96,6 +96,7 @@ public class Writer(
         ElementWriter(this, BytesStart(name))
 
     public fun intoInner(): Appendable = output
+
     public fun intoString(): String = output.toString()
 
     override fun toString(): String = output.toString()

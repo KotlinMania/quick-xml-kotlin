@@ -16,19 +16,22 @@ public data class DetectedEncoding(
     public val bomSize: Int,
 )
 
-public class EncodingError(override val message: String) : Exception(message)
+public class EncodingError(
+    override val message: String,
+) : Exception(message)
 
 /**
  * Decoder of byte slices into strings.
  */
-public class Decoder(public val encodingName: String = XmlEncoding.UTF_8) {
-    public fun decode(bytes: ByteArray): String {
-        return try {
+public class Decoder(
+    public val encodingName: String = XmlEncoding.UTF_8,
+) {
+    public fun decode(bytes: ByteArray): String =
+        try {
             bytes.decodeToString()
         } catch (e: Exception) {
             throw EncodingError("cannot decode input using $encodingName: ${e.message}")
         }
-    }
 
     public fun decodeCow(bytes: ByteArray): String = decode(bytes)
 
@@ -44,10 +47,12 @@ public class Decoder(public val encodingName: String = XmlEncoding.UTF_8) {
     }
 
     override fun hashCode(): Int = encodingName.lowercase().hashCode()
+
     override fun toString(): String = "Decoder($encodingName)"
 
     public companion object {
         public fun utf8(): Decoder = Decoder(XmlEncoding.UTF_8)
+
         public fun utf16(): Decoder = Decoder(XmlEncoding.UTF_16LE)
     }
 }

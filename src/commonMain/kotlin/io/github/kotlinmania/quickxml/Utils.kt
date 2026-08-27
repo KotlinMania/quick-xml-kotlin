@@ -17,7 +17,9 @@ public fun writeByteString(appendable: Appendable, byteString: ByteArray) {
     appendable.append('"')
 }
 
-public class ByteBuf(public val data: ByteArray) {
+public class ByteBuf(
+    public val data: ByteArray,
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is ByteBuf) return false
@@ -33,7 +35,9 @@ public class ByteBuf(public val data: ByteArray) {
     }
 }
 
-public class Bytes(public val data: ByteArray) {
+public class Bytes(
+    public val data: ByteArray,
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Bytes) return false
@@ -119,7 +123,9 @@ public fun trimXmlSpaces(text: String): String {
     return if (start == 0 && end == text.length) text else text.substring(start, end)
 }
 
-public class CDataIterator(value: String) : Iterator<String> {
+public class CDataIterator(
+    value: String,
+) : Iterator<String> {
     private var unprocessed: String = value
     private var finished: Boolean = false
 

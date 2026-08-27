@@ -10,7 +10,6 @@ import io.github.kotlinmania.quickxml.events.BytesCData
 import io.github.kotlinmania.quickxml.events.BytesDecl
 import io.github.kotlinmania.quickxml.events.BytesEnd
 import io.github.kotlinmania.quickxml.events.BytesPI
-import io.github.kotlinmania.quickxml.events.BytesRef
 import io.github.kotlinmania.quickxml.events.BytesStart
 import io.github.kotlinmania.quickxml.events.BytesText
 import io.github.kotlinmania.quickxml.events.Event
@@ -40,6 +39,7 @@ public class Reader(
     }
 
     public fun config(): Config = config
+
     public fun configMut(): Config = config
 
     public fun trimText(trim: Boolean): Reader {
@@ -63,7 +63,9 @@ public class Reader(
     }
 
     public fun bufferPosition(): Long = offset.toLong()
+
     public fun errorPosition(): Long = offset.toLong()
+
     public fun decoder(): Decoder = decoder
 
     public fun readEvent(): Event {
@@ -215,8 +217,9 @@ public class Reader(
         }
         val content = buffer.copyOfRange(start, idx)
         offset = idx + 2
-        val isDecl = startsWithSeq(content, 0, "xml".encodeToByteArray()) &&
-            (content.size == 3 || isWhitespace(content[3]))
+        val isDecl =
+            startsWithSeq(content, 0, "xml".encodeToByteArray()) &&
+                (content.size == 3 || isWhitespace(content[3]))
         return if (isDecl) {
             Event.Decl(BytesDecl(content))
         } else {
@@ -375,6 +378,7 @@ public class Reader(
 
     public companion object {
         public fun fromStr(xml: String): Reader = Reader(xml.encodeToByteArray())
+
         public fun fromBytes(bytes: ByteArray): Reader = Reader(bytes)
     }
 }

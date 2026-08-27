@@ -43,7 +43,8 @@ class WriterTest {
     @Test
     fun testElementWriter() {
         val writer = Writer()
-        writer.createElement("root")
+        writer
+            .createElement("root")
             .withAttribute("key", "val")
             .writeTextContent("inside")
 
@@ -53,7 +54,8 @@ class WriterTest {
     @Test
     fun testElementWriterInner() {
         val writer = Writer()
-        writer.createElement("parent")
+        writer
+            .createElement("parent")
             .writeInnerContent { w ->
                 w.createElement("item1").writeEmpty()
                 w.createElement("item2").writeTextContent("val2")

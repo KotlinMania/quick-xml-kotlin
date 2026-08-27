@@ -1,7 +1,6 @@
 // port-lint: source reader/ns_reader.rs
 package io.github.kotlinmania.quickxml.reader
 
-import io.github.kotlinmania.quickxml.Namespace
 import io.github.kotlinmania.quickxml.NamespaceResolver
 import io.github.kotlinmania.quickxml.PrefixBinding
 import io.github.kotlinmania.quickxml.QName
@@ -24,7 +23,9 @@ public class NsReader(
     private var pendingPop: Boolean = false
 
     public fun config(): Config = reader.config()
+
     public fun configMut(): Config = reader.configMut()
+
     public fun resolver(): NamespaceResolver = nsResolver
 
     public fun prefixes(): List<PrefixBinding> = nsResolver.bindings()
@@ -80,7 +81,9 @@ public class NsReader(
 
     public companion object {
         public fun fromReader(reader: Reader): NsReader = NsReader(reader)
+
         public fun fromStr(s: String): NsReader = NsReader(s)
+
         public fun fromBytes(b: ByteArray): NsReader = NsReader(b)
     }
 }

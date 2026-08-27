@@ -56,9 +56,7 @@ public class BytesStart(
         return this
     }
 
-    public fun pushAttribute(key: String, value: String): BytesStart {
-        return pushAttribute(Attribute(key, value))
-    }
+    public fun pushAttribute(key: String, value: String): BytesStart = pushAttribute(Attribute(key, value))
 
     public fun extendAttributes(attrs: Iterable<Attribute>): BytesStart {
         for (attr in attrs) {
@@ -96,6 +94,7 @@ public class BytesStart(
 
     public companion object {
         public fun from(name: String): BytesStart = BytesStart(name.encodeToByteArray())
+
         public fun fromContent(content: String, nameLen: Int): BytesStart = BytesStart(content.encodeToByteArray(), nameLen)
     }
 }
@@ -133,11 +132,15 @@ public class BytesEnd(
     }
 }
 
-public class BytesText(public val data: ByteArray) {
+public class BytesText(
+    public val data: ByteArray,
+) {
     public constructor(text: String) : this(text.encodeToByteArray())
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
+
     public fun asString(): String = data.decodeToString()
 
     public fun unescape(): String = unescape(data.decodeToString())
@@ -158,19 +161,25 @@ public class BytesText(public val data: ByteArray) {
     }
 
     override fun hashCode(): Int = data.contentHashCode()
+
     override fun toString(): String = asString()
 
     public companion object {
         public fun fromPlain(text: String): BytesText = BytesText(escape(text).encodeToByteArray())
+
         public fun fromEscaped(text: String): BytesText = BytesText(text.encodeToByteArray())
     }
 }
 
-public class BytesCData(public val data: ByteArray) {
+public class BytesCData(
+    public val data: ByteArray,
+) {
     public constructor(content: String) : this(content.encodeToByteArray())
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
+
     public fun asString(): String = data.decodeToString()
 
     override fun equals(other: Any?): Boolean {
@@ -180,14 +189,19 @@ public class BytesCData(public val data: ByteArray) {
     }
 
     override fun hashCode(): Int = data.contentHashCode()
+
     override fun toString(): String = "<![CDATA[${data.decodeToString()}]]>"
 }
 
-public class BytesDecl(public val data: ByteArray) {
+public class BytesDecl(
+    public val data: ByteArray,
+) {
     public constructor(content: String) : this(content.encodeToByteArray())
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
+
     public fun asString(): String = data.decodeToString()
 
     public fun version(): String {
@@ -227,6 +241,7 @@ public class BytesDecl(public val data: ByteArray) {
     }
 
     override fun hashCode(): Int = data.contentHashCode()
+
     override fun toString(): String = "<?${data.decodeToString()}?>"
 
     public companion object {
@@ -244,11 +259,15 @@ public class BytesDecl(public val data: ByteArray) {
     }
 }
 
-public class BytesPI(private val raw: ByteArray) {
+public class BytesPI(
+    private val raw: ByteArray,
+) {
     public constructor(content: String) : this(content.encodeToByteArray())
 
     public fun intoInner(): ByteArray = raw
+
     public fun asRef(): ByteArray = raw
+
     public fun asString(): String = raw.decodeToString()
 
     public fun target(): QName {
@@ -272,14 +291,19 @@ public class BytesPI(private val raw: ByteArray) {
     }
 
     override fun hashCode(): Int = raw.contentHashCode()
+
     override fun toString(): String = "<?${raw.decodeToString()}?>"
 }
 
-public class BytesRef(public val data: ByteArray) {
+public class BytesRef(
+    public val data: ByteArray,
+) {
     public constructor(name: String) : this(name.encodeToByteArray())
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
+
     public fun asString(): String = data.decodeToString()
 
     override fun equals(other: Any?): Boolean {
@@ -289,19 +313,47 @@ public class BytesRef(public val data: ByteArray) {
     }
 
     override fun hashCode(): Int = data.contentHashCode()
+
     override fun toString(): String = "&${data.decodeToString()};"
 }
 
 public sealed class Event {
-    public data class Start(public val event: BytesStart) : Event()
-    public data class End(public val event: BytesEnd) : Event()
-    public data class Empty(public val event: BytesStart) : Event()
-    public data class Text(public val event: BytesText) : Event()
-    public data class Comment(public val event: BytesText) : Event()
-    public data class CData(public val event: BytesCData) : Event()
-    public data class Decl(public val event: BytesDecl) : Event()
-    public data class PI(public val event: BytesPI) : Event()
-    public data class DocType(public val event: BytesText) : Event()
+    public data class Start(
+        public val event: BytesStart,
+    ) : Event()
+
+    public data class End(
+        public val event: BytesEnd,
+    ) : Event()
+
+    public data class Empty(
+        public val event: BytesStart,
+    ) : Event()
+
+    public data class Text(
+        public val event: BytesText,
+    ) : Event()
+
+    public data class Comment(
+        public val event: BytesText,
+    ) : Event()
+
+    public data class CData(
+        public val event: BytesCData,
+    ) : Event()
+
+    public data class Decl(
+        public val event: BytesDecl,
+    ) : Event()
+
+    public data class PI(
+        public val event: BytesPI,
+    ) : Event()
+
+    public data class DocType(
+        public val event: BytesText,
+    ) : Event()
+
     public object Eof : Event() {
         override fun toString(): String = "Event.Eof"
     }

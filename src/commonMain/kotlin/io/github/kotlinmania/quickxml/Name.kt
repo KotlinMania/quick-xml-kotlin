@@ -2,33 +2,53 @@
 package io.github.kotlinmania.quickxml
 
 public sealed class NamespaceError : Exception() {
-    public data class UnknownPrefix(public val prefix: ByteArray) : NamespaceError() {
+    public data class UnknownPrefix(
+        public val prefix: ByteArray,
+    ) : NamespaceError() {
         override val message: String get() = "unknown namespace prefix '${prefix.decodeToString()}'"
+
         override fun equals(other: Any?): Boolean = other is UnknownPrefix && prefix.contentEquals(other.prefix)
+
         override fun hashCode(): Int = prefix.contentHashCode()
     }
 
-    public data class InvalidXmlPrefixBind(public val namespace: ByteArray) : NamespaceError() {
+    public data class InvalidXmlPrefixBind(
+        public val namespace: ByteArray,
+    ) : NamespaceError() {
         override val message: String get() = "the namespace prefix 'xml' cannot be bound to '${namespace.decodeToString()}'"
+
         override fun equals(other: Any?): Boolean = other is InvalidXmlPrefixBind && namespace.contentEquals(other.namespace)
+
         override fun hashCode(): Int = namespace.contentHashCode()
     }
 
-    public data class InvalidXmlnsPrefixBind(public val namespace: ByteArray) : NamespaceError() {
+    public data class InvalidXmlnsPrefixBind(
+        public val namespace: ByteArray,
+    ) : NamespaceError() {
         override val message: String get() = "the namespace prefix 'xmlns' cannot be bound to '${namespace.decodeToString()}'"
+
         override fun equals(other: Any?): Boolean = other is InvalidXmlnsPrefixBind && namespace.contentEquals(other.namespace)
+
         override fun hashCode(): Int = namespace.contentHashCode()
     }
 
-    public data class InvalidPrefixForXml(public val prefix: ByteArray) : NamespaceError() {
+    public data class InvalidPrefixForXml(
+        public val prefix: ByteArray,
+    ) : NamespaceError() {
         override val message: String get() = "the namespace prefix '${prefix.decodeToString()}' cannot be bound to 'http://www.w3.org/XML/1998/namespace'"
+
         override fun equals(other: Any?): Boolean = other is InvalidPrefixForXml && prefix.contentEquals(other.prefix)
+
         override fun hashCode(): Int = prefix.contentHashCode()
     }
 
-    public data class InvalidPrefixForXmlns(public val prefix: ByteArray) : NamespaceError() {
+    public data class InvalidPrefixForXmlns(
+        public val prefix: ByteArray,
+    ) : NamespaceError() {
         override val message: String get() = "the namespace prefix '${prefix.decodeToString()}' cannot be bound to 'http://www.w3.org/2000/xmlns/'"
+
         override fun equals(other: Any?): Boolean = other is InvalidPrefixForXmlns && prefix.contentEquals(other.prefix)
+
         override fun hashCode(): Int = prefix.contentHashCode()
     }
 }
@@ -38,12 +58,15 @@ public data class DecomposedName(
     public val prefix: Prefix?,
 )
 
-public class QName(public val data: ByteArray) {
+public class QName(
+    public val data: ByteArray,
+) {
     public constructor(str: String) : this(str.encodeToByteArray())
 
     private val colonIndex: Int = data.indexOf(58.toByte()) // ':'
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
 
     public fun localName(): LocalName =
@@ -101,15 +124,20 @@ public class QName(public val data: ByteArray) {
         private val XMLNS_BYTES = "xmlns".encodeToByteArray()
 
         public fun from(str: String): QName = QName(str.encodeToByteArray())
+
         public fun from(bytes: ByteArray): QName = QName(bytes)
     }
 }
 
-public class LocalName(public val data: ByteArray) {
+public class LocalName(
+    public val data: ByteArray,
+) {
     public constructor(str: String) : this(str.encodeToByteArray())
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
+
     public fun asString(): String = data.decodeToString()
 
     override fun equals(other: Any?): Boolean {
@@ -119,19 +147,25 @@ public class LocalName(public val data: ByteArray) {
     }
 
     override fun hashCode(): Int = data.contentHashCode()
+
     override fun toString(): String = asString()
 
     public companion object {
         public fun from(str: String): LocalName = LocalName(str.encodeToByteArray())
+
         public fun from(bytes: ByteArray): LocalName = LocalName(bytes)
     }
 }
 
-public class Prefix(public val data: ByteArray) {
+public class Prefix(
+    public val data: ByteArray,
+) {
     public constructor(str: String) : this(str.encodeToByteArray())
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
+
     public fun asString(): String = data.decodeToString()
 
     override fun equals(other: Any?): Boolean {
@@ -141,19 +175,25 @@ public class Prefix(public val data: ByteArray) {
     }
 
     override fun hashCode(): Int = data.contentHashCode()
+
     override fun toString(): String = asString()
 
     public companion object {
         public fun from(str: String): Prefix = Prefix(str.encodeToByteArray())
+
         public fun from(bytes: ByteArray): Prefix = Prefix(bytes)
     }
 }
 
-public class Namespace(public val data: ByteArray) {
+public class Namespace(
+    public val data: ByteArray,
+) {
     public constructor(str: String) : this(str.encodeToByteArray())
 
     public fun intoInner(): ByteArray = data
+
     public fun asRef(): ByteArray = data
+
     public fun asString(): String = data.decodeToString()
 
     override fun equals(other: Any?): Boolean {
@@ -163,6 +203,7 @@ public class Namespace(public val data: ByteArray) {
     }
 
     override fun hashCode(): Int = data.contentHashCode()
+
     override fun toString(): String = asString()
 
     public companion object {
@@ -170,6 +211,7 @@ public class Namespace(public val data: ByteArray) {
         public val XMLNS: Namespace = Namespace("http://www.w3.org/2000/xmlns/".encodeToByteArray())
 
         public fun from(str: String): Namespace = Namespace(str.encodeToByteArray())
+
         public fun from(bytes: ByteArray): Namespace = Namespace(bytes)
     }
 }
@@ -179,7 +221,9 @@ public sealed class PrefixDeclaration {
         override fun toString(): String = "PrefixDeclaration.Default"
     }
 
-    public data class Named(public val prefix: String) : PrefixDeclaration() {
+    public data class Named(
+        public val prefix: String,
+    ) : PrefixDeclaration() {
         override fun toString(): String = "PrefixDeclaration.Named($prefix)"
     }
 }
@@ -190,8 +234,14 @@ public data class PrefixBinding(
 )
 
 public sealed class ResolveResult {
-    public data class Bound(public val namespace: Namespace) : ResolveResult()
-    public data class Unknown(public val prefix: String) : ResolveResult()
+    public data class Bound(
+        public val namespace: Namespace,
+    ) : ResolveResult()
+
+    public data class Unknown(
+        public val prefix: String,
+    ) : ResolveResult()
+
     public object Unbound : ResolveResult() {
         override fun toString(): String = "ResolveResult.Unbound"
     }
