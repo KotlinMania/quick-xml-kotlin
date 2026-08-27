@@ -1,4 +1,4 @@
-// port-lint: source quick-xml/src/utils.rs
+// port-lint: source utils.rs
 package io.github.kotlinmania.quickxml
 
 public fun writeByteString(appendable: Appendable, byteString: ByteArray) {

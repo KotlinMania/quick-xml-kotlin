@@ -1,4 +1,4 @@
-// port-lint: tests quick-xml/src/events/mod.rs
+// port-lint: tests events/mod.rs
 package io.github.kotlinmania.quickxml
 
 import io.github.kotlinmania.quickxml.events.BytesDecl
