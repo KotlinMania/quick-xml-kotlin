@@ -1,4 +1,4 @@
-// port-lint: source escape.rs
+// port-lint: source quick-xml/src/escape.rs
 package io.github.kotlinmania.quickxml
 
 public sealed class ParseCharRefError : Exception() {
