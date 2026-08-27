@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 12/34 (35.3%)
-- **Function parity:** 80/619 matched (target 204) — 12.9%
-- **Class/type parity:** 26/204 matched (target 91) — 12.7%
-- **Combined symbol parity:** 106/823 matched (target 295) — 12.9%
-- **Average inline-code cosine:** 0.29 (function body across 9 matched files)
-- **Average documentation cosine:** 0.04 (doc text across 9 matched files)
-- **Cheat-zeroed Files:** 3
-- **Critical Issues:** 11 files with <0.60 function similarity
+- **Files Present:** 14/34 (41.2%)
+- **Function parity:** 88/728 matched (target 300) — 12.1%
+- **Class/type parity:** 27/232 matched (target 111) — 11.6%
+- **Combined symbol parity:** 115/960 matched (target 411) — 12.0%
+- **Average inline-code cosine:** 0.20 (function body across 8 matched files)
+- **Average documentation cosine:** 0.05 (doc text across 8 matched files)
+- **Cheat-zeroed Files:** 6
+- **Critical Issues:** 14 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -38,7 +38,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 3)
 - **Missing types:** `Target`
 
-### 2. encoding
+### 2. quick-xml.encoding
 
 - **Target:** `quickxml.Encoding`
 - **Similarity:** 0.28
@@ -49,7 +49,22 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/2 matched (target 5)
 - **Missing types:** _none_
 
-### 3. events.mod
+### 3. de.mod
+
+- **Target:** `reader.Config [STUB] [PROVENANCE-FALLBACK]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 797910.0
+- **Functions:** 0/68 matched (target 2)
+- **Missing functions:** `is_non_whitespace`, `new`, `trimmed`, `is_blank`, `deref`, `from`, `into_owned`, `is_empty`, `next_impl`, `current_event_is_last_text`, `drain_text`, `next`, `resolve_reference`, `read_to_end`, `decoder`, `from_str`, `from_reader`, `get_ref`, `event_buffer_size`, `peek`, `last_peeked`, `skip_whitespaces`, `skip_checkpoint`, `skip`, `skip_event`, `start_replay`, `read_string`, `read_string_impl`, `read_text`, `skip_next_tree`, `check_eof_reached`, `borrowing`, `from_str_with_resolver`, `borrowing_with_resolver`, `buffering`, `with_resolver`, `buffering_with_resolver`, `deserialize_struct`, `deserialize_unit`, `deserialize_newtype_struct`, `deserialize_enum`, `deserialize_seq`, `deserialize_option`, `deserialize_any`, `next_element_seed`, `into_deserializer`, `skip_uninterested`, `has_nil_attr`, `make_de`, `read_and_peek`, `partial_replay`, `limit`, `invalid_xml`, `complex`, `invalid_xml1`, `invalid_xml2`, `borrowing_reader_parity`, `borrowing_reader_events`, `text`, `cdata`, `text_and_cdata`, `text_and_empty_cdata`, `cdata_and_text`, `empty_cdata_and_text`, `cdata_and_cdata`, `start`, `end`, `eof`
+- **Types:** 0/11 matched (target 1)
+- **Missing types:** `Text`, `Target`, `DeEvent`, `PayloadEvent`, `XmlReader`, `Deserializer`, `Error`, `XmlRead`, `IoReader`, `SliceReader`, `List`
+- **Tests:** 0/20 matched
+- **Provenance warning:** port-lint provenance header matched only by basename: `quick-xml/src/reader/mod.rs` vs expected `de/mod.rs`
+- **Proposed provenance header:** `// port-lint: source de/mod.rs` (current: `// port-lint: source quick-xml/src/reader/mod.rs`)
+- **Lint issues:** 1
+
+### 4. events.mod
 
 - **Target:** `events.Mod [STUB]`
 - **Similarity:** 0.00
@@ -61,18 +76,22 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `BytesStart`, `Target`, `BytesEnd`, `BytesText`, `BytesCData`, `CDataIterator`, `Item`, `BytesPI`, `BytesDecl`, `BytesRef`, `Event`
 - **Tests:** 0/3 matched
 
-### 4. reader.mod
+### 5. se.mod
 
-- **Target:** `reader.Mod [STUB]`
+- **Target:** `events.Events [STUB] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
-- **Priority Score:** 343410.0
-- **Functions:** 0/24 matched (target 6)
-- **Missing functions:** `trim_text`, `enable_all_checks`, `default`, `encoding`, `can_be_refined`, `offset`, `get_ref`, `get_mut`, `read`, `fill_buf`, `consume`, `from_reader`, `config`, `config_mut`, `into_inner`, `buffer_position`, `error_position`, `decoder`, `stream`, `read_event_impl`, `read_until_close`, `new`, `parse`, `to_err`
-- **Types:** 0/10 matched (target 1)
-- **Missing types:** `Config`, `Span`, `ParseState`, `EncodingRef`, `BinaryStream`, `Reader`, `ReadTextResult`, `ReadRefResult`, `XmlSource`, `BangType`
+- **Priority Score:** 565810.0
+- **Functions:** 2/41 matched (target 72)
+- **Missing functions:** `to_writer`, `to_utf8_io_writer`, `to_writer_with_root`, `to_string_with_root`, `allow_indent`, `is_text`, `is_xml11_name_start_char`, `is_xml11_name_char`, `try_from`, `borrow`, `increase`, `decrease`, `write_indent`, `with_root`, `expand_empty_elements`, `text_format`, `indent`, `set_quote_level`, `set_indent`, `ser`, `ser_name`, `serialize_none`, `serialize_some`, `serialize_unit`, `serialize_unit_struct`, `serialize_unit_variant`, `serialize_newtype_struct`, `serialize_newtype_variant`, `serialize_seq`, `serialize_tuple`, `serialize_tuple_struct`, `serialize_tuple_variant`, `serialize_map`, `serialize_struct`, `serialize_struct_variant`, `default_`, `minimal`, `partial`, `full`
+- **Types:** 0/17 matched (target 18)
+- **Missing types:** `TextFormat`, `QuoteLevel`, `WriteResult`, `XmlName`, `Indent`, `Serializer`, `Ok`, `Error`, `SerializeSeq`, `SerializeTuple`, `SerializeTupleStruct`, `SerializeTupleVariant`, `SerializeMap`, `SerializeStruct`, `SerializeStructVariant`, `Element`, `Example`
+- **Tests:** 0/4 matched
+- **Provenance warning:** port-lint provenance header matched only by basename: `quick-xml/src/events/mod.rs` vs expected `se/mod.rs`
+- **Proposed provenance header:** `// port-lint: source se/mod.rs` (current: `// port-lint: source quick-xml/src/events/mod.rs`)
+- **Lint issues:** 1
 
-### 5. name
+### 6. quick-xml.name
 
 - **Target:** `quickxml.Name`
 - **Similarity:** 0.13
@@ -84,7 +103,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Error`, `NamespaceBinding`, `NamespaceBindingsIter`, `Item`, `PrefixIter`, `NamespaceBindingsOfLevelIter`
 - **Tests:** 0/11 matched
 
-### 6. events.attributes
+### 7. events.attributes
 
 - **Target:** `events.Attributes`
 - **Similarity:** 0.05
@@ -96,7 +115,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Item`, `Attr`, `AttrResult`, `State`, `IterState`
 - **Tests:** 0/7 matched
 
-### 7. utils
+### 8. reader.mod
+
+- **Target:** `reader.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 273410.0
+- **Functions:** 6/24 matched (target 28)
+- **Missing functions:** `enable_all_checks`, `default`, `encoding`, `can_be_refined`, `offset`, `get_ref`, `get_mut`, `read`, `fill_buf`, `consume`, `from_reader`, `into_inner`, `stream`, `read_event_impl`, `read_until_close`, `new`, `parse`, `to_err`
+- **Types:** 1/10 matched (target 2)
+- **Missing types:** `Config`, `Span`, `ParseState`, `EncodingRef`, `BinaryStream`, `ReadTextResult`, `ReadRefResult`, `XmlSource`, `BangType`
+
+### 9. quick-xml.utils
 
 - **Target:** `quickxml.Utils`
 - **Similarity:** 0.19
@@ -108,7 +138,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `CowRef`, `Target`, `ValueVisitor`, `Value`, `Item`
 - **Tests:** 3/3 matched
 
-### 8. escape
+### 10. quick-xml.escape
 
 - **Target:** `quickxml.Escape`
 - **Similarity:** 0.19
@@ -120,7 +150,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 0/10 matched
 
-### 9. writer
+### 11. quick-xml.writer
 
 - **Target:** `writer.Writer`
 - **Similarity:** 0.30
@@ -131,7 +161,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/5 matched (target 4)
 - **Missing types:** `AttributeIndent`, `ToFmtWrite`
 
-### 10. errors
+### 12. quick-xml.errors
 
 - **Target:** `quickxml.Errors`
 - **Similarity:** 0.00
@@ -142,7 +172,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/6 matched (target 22)
 - **Missing types:** `Error`, `Result`, `DeError`, `SeError`
 
-### 11. parser.mod
+### 13. parser.mod
 
 - **Target:** `parser.Parser [STUB]`
 - **Similarity:** 0.00
@@ -153,12 +183,12 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 4)
 - **Missing types:** _none_
 
-### 12. lib
+### 14. quick-xml.lib
 
-- **Target:** `quickxml.Lib`
-- **Similarity:** 1.00
+- **Target:** `quickxml.Lib [STUB]`
+- **Similarity:** 0.00
 - **Dependents:** 0
-- **Priority Score:** 0.0
+- **Priority Score:** 10.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 4)
@@ -172,18 +202,4 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
-
-## Reexport / Wiring Modules
-
-These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
-normal priority and missing-file ladders because they are wiring
-modules, not direct logic ports. Consult them for call-site routing;
-do not treat them as the next implementation target by default.
-
-### Missing
-
-| Source | Expected target | Deps | Source path | Expected path |
-|--------|-----------------|------|-------------|---------------|
-| `de.mod` | `de.Mod` | 0 | `de/mod.rs` | `de/Mod.kt` |
-| `se.mod` | `se.Mod` | 0 | `se/mod.rs` | `se/Mod.kt` |
 
