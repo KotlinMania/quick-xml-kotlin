@@ -1,4 +1,4 @@
-// port-lint: tests writer.rs
+// port-lint: tests quick-xml/src/writer.rs
 package io.github.kotlinmania.quickxml
 
 import io.github.kotlinmania.quickxml.events.BytesDecl
