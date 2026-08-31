@@ -1,4 +1,4 @@
-// port-lint: tests name.rs
+// port-lint: tests quick-xml/src/name.rs
 package io.github.kotlinmania.quickxml
 
 import kotlin.test.Test

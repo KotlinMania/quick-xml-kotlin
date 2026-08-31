@@ -1,4 +1,4 @@
-// port-lint: source parser/mod.rs
+// port-lint: source quick-xml/src/parser/mod.rs
 package io.github.kotlinmania.quickxml.parser
 
 import io.github.kotlinmania.quickxml.SyntaxError
