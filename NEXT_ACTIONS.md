@@ -29,7 +29,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. reader.ns_reader
 
-- **Target:** `reader.NsReader`
+- **Target:** `reader.NsReader [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.44
 - **Dependents:** 2
 - **Priority Score:** 2122605.5
@@ -37,10 +37,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `new`, `read_event_impl`, `process_event`, `into_inner`, `get_mut`, `read_event_into`, `read_resolved_event_into`, `read_to_end_into`, `from_file`, `read_text`, `deref`
 - **Types:** 1/2 matched (target 3)
 - **Missing types:** `Target`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/reader/ns_reader.rs` vs expected `reader/ns_reader.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/reader/ns_reader.rs` vs expected `reader/ns_reader.rs`
+- **Proposed provenance header:** `// port-lint: source reader/ns_reader.rs` (current: `// port-lint: source quick-xml/src/reader/ns_reader.rs`)
+- **Proposed provenance header:** `// port-lint: tests reader/ns_reader.rs` (current: `// port-lint: tests quick-xml/src/reader/ns_reader.rs`)
+- **Lint issues:** 2
 
-### 2. quick-xml.encoding
+### 2. encoding
 
-- **Target:** `quickxml.Encoding`
+- **Target:** `quickxml.Encoding [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.28
 - **Dependents:** 2
 - **Priority Score:** 2051307.2
@@ -48,6 +53,11 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `from`, `source`, `fmt`, `encoding`, `decode_into`
 - **Types:** 2/2 matched (target 5)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/encoding.rs` vs expected `encoding.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/encoding.rs` vs expected `encoding.rs`
+- **Proposed provenance header:** `// port-lint: source encoding.rs` (current: `// port-lint: source quick-xml/src/encoding.rs`)
+- **Proposed provenance header:** `// port-lint: tests encoding.rs` (current: `// port-lint: tests quick-xml/src/encoding.rs`)
+- **Lint issues:** 2
 
 ### 3. de.mod
 
@@ -66,7 +76,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 4. events.mod
 
-- **Target:** `events.Mod [STUB]`
+- **Target:** `events.Mod [STUB] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 676710.0
@@ -75,6 +85,11 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/11 matched (target 1)
 - **Missing types:** `BytesStart`, `Target`, `BytesEnd`, `BytesText`, `BytesCData`, `CDataIterator`, `Item`, `BytesPI`, `BytesDecl`, `BytesRef`, `Event`
 - **Tests:** 0/3 matched
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/events/mod.rs` vs expected `events/mod.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/events/mod.rs` vs expected `events/mod.rs`
+- **Proposed provenance header:** `// port-lint: source events/mod.rs` (current: `// port-lint: source quick-xml/src/events/mod.rs`)
+- **Proposed provenance header:** `// port-lint: tests events/mod.rs` (current: `// port-lint: tests quick-xml/src/events/mod.rs`)
+- **Lint issues:** 2
 
 ### 5. se.mod
 
@@ -91,9 +106,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Proposed provenance header:** `// port-lint: source se/mod.rs` (current: `// port-lint: source quick-xml/src/events/mod.rs`)
 - **Lint issues:** 1
 
-### 6. quick-xml.name
+### 6. name
 
-- **Target:** `quickxml.Name`
+- **Target:** `quickxml.Name [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.13
 - **Dependents:** 0
 - **Priority Score:** 305208.7
@@ -102,10 +117,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 8/14 matched (target 23)
 - **Missing types:** `Error`, `NamespaceBinding`, `NamespaceBindingsIter`, `Item`, `PrefixIter`, `NamespaceBindingsOfLevelIter`
 - **Tests:** 0/11 matched
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/name.rs` vs expected `name.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/name.rs` vs expected `name.rs`
+- **Proposed provenance header:** `// port-lint: source name.rs` (current: `// port-lint: source quick-xml/src/name.rs`)
+- **Proposed provenance header:** `// port-lint: tests name.rs` (current: `// port-lint: tests quick-xml/src/name.rs`)
+- **Lint issues:** 2
 
 ### 7. events.attributes
 
-- **Target:** `events.Attributes`
+- **Target:** `events.Attributes [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.05
 - **Dependents:** 0
 - **Priority Score:** 273909.5
@@ -114,10 +134,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/8 matched (target 9)
 - **Missing types:** `Item`, `Attr`, `AttrResult`, `State`, `IterState`
 - **Tests:** 0/7 matched
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/events/attributes.rs` vs expected `events/attributes.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/events/attributes.rs` vs expected `events/attributes.rs`
+- **Proposed provenance header:** `// port-lint: source events/attributes.rs` (current: `// port-lint: source quick-xml/src/events/attributes.rs`)
+- **Proposed provenance header:** `// port-lint: tests events/attributes.rs` (current: `// port-lint: tests quick-xml/src/events/attributes.rs`)
+- **Lint issues:** 2
 
 ### 8. reader.mod
 
-- **Target:** `reader.Mod [STUB]`
+- **Target:** `reader.Mod [STUB] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 273410.0
@@ -125,10 +150,17 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `enable_all_checks`, `default`, `encoding`, `can_be_refined`, `offset`, `get_ref`, `get_mut`, `read`, `fill_buf`, `consume`, `from_reader`, `into_inner`, `stream`, `read_event_impl`, `read_until_close`, `new`, `parse`, `to_err`
 - **Types:** 1/10 matched (target 2)
 - **Missing types:** `Config`, `Span`, `ParseState`, `EncodingRef`, `BinaryStream`, `ReadTextResult`, `ReadRefResult`, `XmlSource`, `BangType`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/reader/mod.rs` vs expected `reader/mod.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/reader/mod.rs` vs expected `reader/mod.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/reader/mod.rs` vs expected `reader/mod.rs`
+- **Proposed provenance header:** `// port-lint: source reader/mod.rs` (current: `// port-lint: source quick-xml/src/reader/mod.rs`)
+- **Proposed provenance header:** `// port-lint: source reader/mod.rs` (current: `// port-lint: source quick-xml/src/reader/mod.rs`)
+- **Proposed provenance header:** `// port-lint: tests reader/mod.rs` (current: `// port-lint: tests quick-xml/src/reader/mod.rs`)
+- **Lint issues:** 3
 
-### 9. quick-xml.utils
+### 9. utils
 
-- **Target:** `quickxml.Utils`
+- **Target:** `quickxml.Utils [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.19
 - **Dependents:** 0
 - **Priority Score:** 203608.1
@@ -137,10 +169,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 4/9 matched (target 5)
 - **Missing types:** `CowRef`, `Target`, `ValueVisitor`, `Value`, `Item`
 - **Tests:** 3/3 matched
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/utils.rs` vs expected `utils.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/utils.rs` vs expected `utils.rs`
+- **Proposed provenance header:** `// port-lint: source utils.rs` (current: `// port-lint: source quick-xml/src/utils.rs`)
+- **Proposed provenance header:** `// port-lint: tests utils.rs` (current: `// port-lint: tests quick-xml/src/utils.rs`)
+- **Lint issues:** 2
 
-### 10. quick-xml.escape
+### 10. escape
 
-- **Target:** `quickxml.Escape`
+- **Target:** `quickxml.Escape [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.19
 - **Dependents:** 0
 - **Priority Score:** 172908.1
@@ -149,10 +186,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/2 matched (target 10)
 - **Missing types:** _none_
 - **Tests:** 0/10 matched
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/escape.rs` vs expected `escape.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/escape.rs` vs expected `escape.rs`
+- **Proposed provenance header:** `// port-lint: source escape.rs` (current: `// port-lint: source quick-xml/src/escape.rs`)
+- **Proposed provenance header:** `// port-lint: tests escape.rs` (current: `// port-lint: tests quick-xml/src/escape.rs`)
+- **Lint issues:** 2
 
-### 11. quick-xml.writer
+### 11. writer
 
-- **Target:** `writer.Writer`
+- **Target:** `writer.Writer [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.30
 - **Dependents:** 0
 - **Priority Score:** 133207.0
@@ -160,10 +202,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `get_ref`, `write_bom`, `write`, `write_serializable`, `new_line`, `write_attr`, `write_cdata_content`, `write_pi_content`, `write_str`, `additional`, `ensure`
 - **Types:** 3/5 matched (target 4)
 - **Missing types:** `AttributeIndent`, `ToFmtWrite`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/writer.rs` vs expected `writer.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:quick-xml/src/writer.rs` vs expected `writer.rs`
+- **Proposed provenance header:** `// port-lint: source writer.rs` (current: `// port-lint: source quick-xml/src/writer.rs`)
+- **Proposed provenance header:** `// port-lint: tests writer.rs` (current: `// port-lint: tests quick-xml/src/writer.rs`)
+- **Lint issues:** 2
 
-### 12. quick-xml.errors
+### 12. errors
 
-- **Target:** `quickxml.Errors`
+- **Target:** `quickxml.Errors [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 91110.0
@@ -171,10 +218,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `fmt`, `missed_end`, `from`, `source`, `custom`
 - **Types:** 2/6 matched (target 22)
 - **Missing types:** `Error`, `Result`, `DeError`, `SeError`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/errors.rs` vs expected `errors.rs`
+- **Proposed provenance header:** `// port-lint: source errors.rs` (current: `// port-lint: source quick-xml/src/errors.rs`)
+- **Lint issues:** 1
 
 ### 13. parser.mod
 
-- **Target:** `parser.Parser [STUB]`
+- **Target:** `parser.Parser [STUB] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 110.0
@@ -182,10 +232,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 4)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/parser/mod.rs` vs expected `parser/mod.rs`
+- **Proposed provenance header:** `// port-lint: source parser/mod.rs` (current: `// port-lint: source quick-xml/src/parser/mod.rs`)
+- **Lint issues:** 1
 
-### 14. quick-xml.lib
+### 14. lib
 
-- **Target:** `quickxml.Lib [STUB]`
+- **Target:** `quickxml.Lib [STUB] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -193,6 +246,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 4)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `quick-xml/src/lib.rs` vs expected `lib.rs`
+- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source quick-xml/src/lib.rs`)
+- **Lint issues:** 1
 
 ## Success Criteria
 
