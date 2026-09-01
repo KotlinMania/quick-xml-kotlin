@@ -1,4 +1,4 @@
-// port-lint: source quick-xml/src/errors.rs
+// port-lint: source errors.rs
 package io.github.kotlinmania.quickxml
 
 import io.github.kotlinmania.quickxml.events.AttrError

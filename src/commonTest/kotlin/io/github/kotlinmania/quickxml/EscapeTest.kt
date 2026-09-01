@@ -1,4 +1,4 @@
-// port-lint: tests quick-xml/src/escape.rs
+// port-lint: tests escape.rs
 package io.github.kotlinmania.quickxml
 
 import kotlin.test.Test
