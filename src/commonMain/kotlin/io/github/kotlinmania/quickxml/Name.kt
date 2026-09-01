@@ -1,4 +1,4 @@
-// port-lint: source quick-xml/src/name.rs
+// port-lint: source name.rs
 package io.github.kotlinmania.quickxml
 
 public sealed class NamespaceError : Exception() {
