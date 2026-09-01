@@ -15,5 +15,29 @@
     "todos": true,
     "lint": true
   },
-  "reexport_modules": []
+  "reexport_modules": [
+    "lib",
+    "lib.rs",
+    "quick-xml/src/lib.rs",
+    "reader/mod",
+    "reader.mod",
+    "reader/mod.rs",
+    "quick-xml/src/reader/mod.rs",
+    "parser/mod",
+    "parser.mod",
+    "parser/mod.rs",
+    "quick-xml/src/parser/mod.rs",
+    "events/mod",
+    "events.mod",
+    "events/mod.rs",
+    "quick-xml/src/events/mod.rs",
+    "se/mod",
+    "se.mod",
+    "se/mod.rs",
+    "quick-xml/src/se/mod.rs",
+    "de/mod",
+    "de.mod",
+    "de/mod.rs",
+    "quick-xml/src/de/mod.rs"
+  ]
 }
