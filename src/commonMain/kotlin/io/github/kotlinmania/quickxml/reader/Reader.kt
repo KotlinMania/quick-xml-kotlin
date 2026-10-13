@@ -69,10 +69,10 @@ public class Reader(
     public fun decoder(): Decoder = decoder
 
     public fun readEvent(): Event {
-        if (pendingEnd != null) {
-            val end = pendingEnd!!
+        val pending = pendingEnd
+        if (pending != null) {
             pendingEnd = null
-            return Event.End(end)
+            return Event.End(pending)
         }
 
         if (offset >= buffer.size) {
