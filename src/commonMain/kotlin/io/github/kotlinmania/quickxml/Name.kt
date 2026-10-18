@@ -379,5 +379,3 @@ public class NamespaceResolver {
     public fun resolveAttribute(name: QName): ResolvedQName =
         resolve(name, useDefault = false)
 }
-
-public typealias Namespaces = NamespaceResolver
