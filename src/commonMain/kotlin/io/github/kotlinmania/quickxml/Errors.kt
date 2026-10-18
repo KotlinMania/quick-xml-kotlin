@@ -113,5 +113,3 @@ public sealed class XmlException(
         public val error: NamespaceError,
     ) : XmlException("namespace error: " + error.message, error)
 }
-
-public typealias QuickXmlException = XmlException
